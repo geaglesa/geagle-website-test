@@ -66,6 +66,22 @@ document.querySelectorAll('.nav a[href], .lang[href]').forEach((link) => {
   }
 });
 
+document.querySelectorAll('.nav a[href]').forEach((link) => {
+  link.addEventListener('click', (e) => {
+    if (!window.matchMedia('(max-width:1020px)').matches) return;
+    const href = link.getAttribute('href') || '';
+    if (!href || href === '#') return;
+
+    const openNav = link.closest('.nav.open');
+    if (!openNav) return;
+
+    e.preventDefault();
+    openNav.classList.remove('open');
+    if (t) t.setAttribute('aria-expanded', 'false');
+    window.location.assign(link.href);
+  });
+});
+
 const serviceSelect = document.querySelector('.contact-form select[name="service"]');
 if (serviceSelect) {
   const params = new URLSearchParams(window.location.search);
