@@ -1079,4 +1079,200 @@
   flex-wrap: wrap;
 }
 
+/* Mobile launch fixes */
+@media (max-width: 760px) {
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .nav-wrap {
+    padding-inline: 10px;
+  }
+
+  .site-header {
+    max-width: 100%;
+    gap: 8px;
+    padding: 10px;
+    overflow: visible;
+  }
+
+  .brand {
+    min-width: 0;
+    flex: 1 1 auto;
+    gap: 10px;
+  }
+
+  .brand > span:last-child {
+    min-width: 0;
+  }
+
+  .brand-logo-mark {
+    width: 56px;
+    height: 56px;
+    flex: 0 0 56px;
+    border-radius: 18px;
+  }
+
+  .brand-logo-mark img {
+    width: 48px;
+    height: 42px;
+  }
+
+  .brand strong {
+    max-width: min(48vw, 220px);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 1rem;
+    line-height: 1.15;
+  }
+
+  .brand small {
+    display: none;
+  }
+
+  .nav-actions {
+    margin-left: 0;
+    flex: 0 0 auto;
+    gap: 6px;
+  }
+
+  .nav-actions .lang {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 34px;
+    padding: 8px 6px;
+  }
+
+  .menu-toggle {
+    display: block !important;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    padding: 8px;
+    order: 3;
+  }
+
+  .nav.open {
+    left: 10px;
+    right: 10px;
+    top: 72px;
+    max-height: calc(100vh - 96px);
+    overflow: auto;
+    z-index: 90;
+  }
+
+  .service-detail-full,
+  .detail-layout,
+  .content-block,
+  .deliver-block,
+  .overview-card {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .service-hero-grid,
+  .ar-page .service-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .service-detail-full .why-panel,
+  .why-panel {
+    display: block !important;
+    width: auto;
+    max-width: calc(100vw - 32px);
+    margin: 18px auto 44px;
+    padding: 28px 20px;
+    overflow: hidden;
+  }
+
+  .service-detail-full .why-panel h2,
+  .why-panel h2 {
+    max-width: 100%;
+    font-size: clamp(1.65rem, 7vw, 2.25rem);
+    line-height: 1.14;
+  }
+
+  .service-detail-full .why-panel ul,
+  .why-panel ul {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 0;
+    margin: 20px 0 0;
+    list-style: none;
+  }
+
+  .service-detail-full .why-panel li,
+  .why-panel li {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .feature-list {
+    grid-template-columns: 1fr !important;
+  }
+
+  .feature-card {
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .ar-page .content-block,
+  .ar-page .feature-card,
+  .ar-page .why-panel {
+    text-align: right;
+  }
+
+  .hero .architecture-visual {
+    max-width: 100%;
+    margin-inline: auto;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-header {
+    border-radius: 20px;
+  }
+
+  .brand-logo-mark {
+    width: 52px;
+    height: 52px;
+    flex-basis: 52px;
+  }
+
+  .brand-logo-mark img {
+    width: 44px;
+    height: 38px;
+  }
+
+  .brand strong {
+    max-width: 43vw;
+    font-size: .96rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.35rem, 11vw, 3rem);
+    line-height: 1.08;
+  }
+
+  .hero-lead {
+    font-size: 1.02rem;
+    line-height: 1.7;
+  }
+
+  .hero-pill {
+    max-width: 100%;
+    padding: 9px 13px;
+    font-size: .88rem;
+  }
+}
+
 
