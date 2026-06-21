@@ -1275,4 +1275,91 @@
   }
 }
 
+/* Arabic mobile hero visual fix */
+@media (max-width: 760px) {
+  .ar-page .hero {
+    overflow: hidden;
+  }
+
+  .ar-page .hero-grid {
+    gap: 28px;
+  }
+
+  .ar-page .nav-actions .primary {
+    display: none !important;
+  }
+
+  .ar-page .hero .architecture-visual {
+    direction: ltr;
+    justify-self: center;
+    width: min(340px, 100%);
+    height: 500px;
+    margin: 16px auto 0;
+    overflow: visible;
+  }
+
+  .ar-page .hero .architecture-visual:before,
+  .ar-page .hero .architecture-visual:after {
+    width: 260px;
+  }
+
+  .ar-page .hero .arch-node {
+    --orbit-radius: 124px;
+    width: 84px;
+    height: 84px;
+    padding: 9px;
+  }
+
+  .ar-page .hero .arch-node strong {
+    max-width: 72px;
+    font-size: .66rem;
+    line-height: 1.12;
+  }
+
+  .ar-page .hero .arch-node small {
+    max-width: 74px;
+    font-size: .52rem;
+    line-height: 1.14;
+  }
+
+  .ar-page .hero .arch-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ar-page .hero .arch-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .ar-page .hero .arch-core {
+    width: 72px;
+    height: 72px;
+  }
+
+  .ar-page .hero .arch-core:before {
+    width: 48px;
+    height: 48px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 390px) {
+  .ar-page .hero .architecture-visual {
+    width: min(310px, 100%);
+    height: 470px;
+  }
+
+  .ar-page .hero .architecture-visual:before,
+  .ar-page .hero .architecture-visual:after {
+    width: 230px;
+  }
+
+  .ar-page .hero .arch-node {
+    --orbit-radius: 112px;
+    width: 78px;
+    height: 78px;
+  }
+}
+
 
