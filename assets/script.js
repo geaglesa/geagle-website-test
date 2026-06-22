@@ -1,4 +1,4 @@
-const t = document.querySelector('.menu-toggle');
+﻿const t = document.querySelector('.menu-toggle');
 const n = document.querySelector('.nav');
 
 if (t && n) {
@@ -104,29 +104,79 @@ if (serviceSelect) {
   }
 }
 
+const WEB3FORMS_ACCESS_KEY = '2751e9d3-6ecd-4e9f-85f5-b685e778ad59';
+
+async function submitToWeb3Forms(form, button) {
+  const data = new FormData(form);
+  if (data.get('website')) return true;
+  data.set('access_key', WEB3FORMS_ACCESS_KEY);
+  data.set('from_name', 'Gulf Eagle Website');
+  data.set('subject', data.get('subject') || 'New Consultation Request - Gulf Eagle Website');
+
+  if (button) {
+    button.disabled = true;
+    button.dataset.originalText = button.textContent;
+    button.textContent = document.documentElement.dir === 'rtl' ? 'جار الإرسال...' : 'Sending...';
+  }
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data
+    });
+    const result = await response.json();
+    if (!response.ok || !result.success) throw new Error(result.message || 'Form submission failed');
+    form.reset();
+    return true;
+  } catch (error) {
+    console.error(error);
+    if (button) {
+      button.disabled = false;
+      button.textContent = button.dataset.originalText || 'Submit';
+    }
+    alert(document.documentElement.dir === 'rtl'
+      ? 'تعذر إرسال الطلب. يرجى المحاولة مرة أخرى أو مراسلتنا مباشرة.'
+      : 'Could not send your request. Please try again or email us directly.');
+    return false;
+  }
+}
+
 const homeContactForm = document.getElementById('contact-form-home');
 if (homeContactForm) {
-  homeContactForm.addEventListener('submit', (e) => {
+  homeContactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = new FormData(homeContactForm);
-    if (data.get('website')) return;
-
-    const lines = [
-      'First Name: ' + (data.get('first_name') || ''),
-      'Last Name: ' + (data.get('last_name') || ''),
-      'Company Email: ' + (data.get('email') || ''),
-      'Mobile: ' + (data.get('mobile') || ''),
-      'Company Name: ' + (data.get('company') || ''),
-      'Service: ' + (data.get('service') || ''),
-      'Message: ' + (data.get('message') || '')
-    ];
-
-    window.location.href = 'mailto:info@geagle.sa?subject='
-      + encodeURIComponent('New Consultation Request - Gulf Eagle Website')
-      + '&body=' + encodeURIComponent(lines.join('\n'));
+    const button = homeContactForm.querySelector('button[type="submit"], .contact-submit');
+    const sent = await submitToWeb3Forms(homeContactForm, button);
+    if (sent) {
+      if (button) {
+        button.disabled = true;
+        button.textContent = document.documentElement.dir === 'rtl' ? 'تم إرسال الطلب' : 'Request Sent';
+      }
+      const success = homeContactForm.querySelector('#form-success');
+      if (success) success.style.display = 'flex';
+    }
   });
 }
 
+document.querySelectorAll('.contact-form').forEach((form) => {
+  if (form.id === 'contact-form-home') return;
+  if (form.dataset.web3formsBound === 'true') return;
+  form.dataset.web3formsBound = 'true';
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = form.querySelector('#submit-btn, button[type="submit"], .contact-submit');
+    const sent = await submitToWeb3Forms(form, button);
+    if (!sent) return;
+
+    const success = form.querySelector('#form-success');
+    if (success) success.style.display = 'flex';
+    if (button) {
+      button.style.display = 'none';
+      button.disabled = true;
+    }
+  });
+});
 document.querySelectorAll('.faq details').forEach((d) => {
   const s = d.querySelector('summary');
   if (!s) return;
@@ -225,3 +275,4 @@ if (revealTargets.length) {
     revealTargets.forEach((el) => revealObserver.observe(el));
   }
 }
+
